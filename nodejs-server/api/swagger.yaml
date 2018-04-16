@@ -1,0 +1,205 @@
+---
+swagger: "2.0"
+info:
+  description: "This is an employee API"
+  version: "1.0.0"
+  title: "Employees API"
+  contact:
+    email: "doriobeidy@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "virtserver.swaggerhub.com"
+basePath: "/do-team/getEmployees/1.0.0"
+tags:
+- name: "developers"
+  description: "Operations available to regular developers"
+schemes:
+- "https"
+paths:
+  /employees/search:
+    get:
+      tags:
+      - "developers"
+      summary: "search employees"
+      description: "By passing in the appropriate options, you can search for available\
+        \ employee in the system"
+      operationId: "searchEmployees"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "query"
+        description: "pass a name for looking up in records"
+        required: false
+        type: "string"
+      - name: "title"
+        in: "query"
+        description: "pass a title for looking up in records"
+        required: false
+        type: "string"
+      - name: "department"
+        in: "query"
+        description: "pass a department for looking up in records"
+        required: false
+        type: "string"
+      - name: "location"
+        in: "query"
+        description: "pass a location for looking up in records"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Employee"
+        400:
+          description: "bad input parameter"
+      x-swagger-router-controller: "Developers"
+  /employees:
+    get:
+      tags:
+      - "developers"
+      summary: "listing employees"
+      description: "By passing in the appropriate options, you can get a list of available\
+        \ employee in the system"
+      operationId: "listingEmployees"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "page_id"
+        in: "query"
+        description: "pass an optional page id for looking up records"
+        required: false
+        type: "string"
+      - name: "limit"
+        in: "query"
+        description: "maximum number of records to return"
+        required: false
+        type: "integer"
+        maximum: 100.0
+        minimum: 0
+        format: "int32"
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Employee"
+        400:
+          description: "bad input parameter"
+      x-swagger-router-controller: "Developers"
+    post:
+      tags:
+      - "developers"
+      summary: "adds an employee"
+      description: "Adds an employee to the system"
+      operationId: "addEmployee"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "employee"
+        description: "employee info to add"
+        required: false
+        schema:
+          $ref: "#/definitions/Employee"
+      responses:
+        201:
+          description: "item created"
+        400:
+          description: "invalid input, object invalid"
+        409:
+          description: "an existing item already exists"
+      x-swagger-router-controller: "Developers"
+    put:
+      tags:
+      - "developers"
+      summary: "update an employee"
+      description: "Update an employee in the system"
+      operationId: "updateEmployee"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "query"
+        description: "pass employee id to update a record"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "employee"
+        description: "employee info to udpate"
+        required: false
+        schema:
+          $ref: "#/definitions/Employee"
+      responses:
+        201:
+          description: "item updated"
+        400:
+          description: "invalid input, employee not found"
+      x-swagger-router-controller: "Developers"
+    delete:
+      tags:
+      - "developers"
+      summary: "delete an employee"
+      description: "Delete an employee in the system"
+      operationId: "deleteEmployee"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "query"
+        description: "pass employee id to delete a record"
+        required: true
+        type: "string"
+      responses:
+        201:
+          description: "item deleted"
+        400:
+          description: "invalid input, employee not found"
+      x-swagger-router-controller: "Developers"
+definitions:
+  Employee:
+    type: "object"
+    required:
+    - "department"
+    - "id"
+    - "location"
+    - "name"
+    - "title"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "Joe"
+      title:
+        type: "string"
+        example: "Senior developer"
+      department:
+        type: "string"
+        example: "Mobiles"
+      location:
+        type: "string"
+        example: "beirut"
+      emp_image:
+        type: "string"
+        example: "https://wd.imagelocation.com"
+    example:
+      emp_image: "https://wd.imagelocation.com"
+      name: "Joe"
+      location: "beirut"
+      id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      title: "Senior developer"
+      department: "Mobiles"
