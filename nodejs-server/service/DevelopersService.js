@@ -8,9 +8,23 @@ var db = require('../repository/employee');
  * employee Employee employee info to add (optional)
  * no response value expected for this operation
  **/
-exports.addEmployee = function(employee) {
+exports.addEmployee = function(employee, res) {
   return new Promise(function(resolve, reject) {
-    resolve();
+    console.log(res.statusCode);
+    const values = [employee.name, employee.title, employee.department, employee.location];
+    db.setEmployee(function(err, data) {
+      var dataEmp = {};
+      if ( err ) return console.error( err );
+      console.log(Object.keys(data));
+      dataEmp['message'] = "Employee created.";
+  
+      if (Object.keys(dataEmp).length > 0) {
+        // console.log(Object.keys(data)[0]);
+        resolve(dataEmp);
+      } else {
+        resolve();
+      }
+    }, values);
   });
 }
 
@@ -40,7 +54,6 @@ exports.deleteEmployee = function(id) {
 
 exports.listingEmployees = function(page_id,limit) {
   return new Promise(function(resolve, reject) {
-  
   
   db.getEmployees(function( err, data ) {
     var dataEmp = {};
