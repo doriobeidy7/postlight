@@ -10,18 +10,18 @@ info:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: "virtserver.swaggerhub.com"
-basePath: "/postlight/api"
+basePath: "/postlight"
 tags:
 - name: "developers"
   description: "Operations available to regular developers"
 schemes:
 - "https"
 paths:
-  /employees/search:
+  /employee/search:
     get:
       tags:
       - "developers"
-      summary: "search employees"
+      summary: "search employee"
       description: "By passing in the appropriate options, you can search for available\
         \ employee in the system"
       operationId: "searchEmployees"
@@ -58,7 +58,7 @@ paths:
         400:
           description: "bad input parameter"
       x-swagger-router-controller: "Developers"
-  /employees:
+  /employee:
     get:
       tags:
       - "developers"

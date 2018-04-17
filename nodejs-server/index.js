@@ -1,5 +1,6 @@
 'use strict';
-
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
 var fs = require('fs'),
     path = require('path'),
     http = require('http');
@@ -7,7 +8,12 @@ var fs = require('fs'),
 var app = require('connect')();
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
-var serverPort = 3000;
+var serverPort = 3001;
+
+app.use(morgan('dev'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // swaggerRouter configuration
 var options = {

@@ -1,5 +1,5 @@
 'use strict';
-
+var db = require('../repository/employee');
 
 /**
  * adds an employee
@@ -28,7 +28,6 @@ exports.deleteEmployee = function(id) {
   });
 }
 
-
 /**
  * listing employees
  * By passing in the appropriate options, you can get a list of available employee in the system
@@ -37,30 +36,26 @@ exports.deleteEmployee = function(id) {
  * limit Integer maximum number of records to return (optional)
  * returns List
  **/
+
+
 exports.listingEmployees = function(page_id,limit) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "emp_image" : "https://wd.imagelocation.com",
-  "name" : "Joe",
-  "location" : "beirut",
-  "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-  "title" : "Senior developer",
-  "department" : "Mobiles"
-}, {
-  "emp_image" : "https://wd.imagelocation.com",
-  "name" : "Joe",
-  "location" : "beirut",
-  "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-  "title" : "Senior developer",
-  "department" : "Mobiles"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
+  
+  
+  db.getEmployees(function( err, data ) {
+    var dataEmp = {};
+    if ( err ) return console.error( err );
+
+    dataEmp['employee'] = JSON.parse(JSON.stringify(data.rows));
+
+    if (Object.keys(dataEmp).length > 0) {
+      // console.log(Object.keys(data)[0]);
+      resolve(dataEmp);
     } else {
       resolve();
     }
   });
+});
 }
 
 
@@ -76,6 +71,7 @@ exports.listingEmployees = function(page_id,limit) {
  **/
 exports.searchEmployees = function(name,title,department,location) {
   return new Promise(function(resolve, reject) {
+   
     var examples = {};
     examples['application/json'] = [ {
   "emp_image" : "https://wd.imagelocation.com",
