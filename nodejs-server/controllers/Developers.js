@@ -5,7 +5,7 @@ var Developers = require('../service/DevelopersService');
 
 module.exports.addEmployee = function addEmployee (req, res, next) {
   var employee = req.swagger.params['employee'].value;
-  Developers.addEmployee(employee, res)
+  Developers.addEmployee(employee)
     .then(function (response) {
       utils.writeJson(res, response);
     })

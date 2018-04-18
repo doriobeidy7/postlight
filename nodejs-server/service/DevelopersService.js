@@ -1,6 +1,5 @@
 'use strict';
 var db = require('../repository/employee');
-
 /**
  * adds an employee
  * Adds an employee to the system
@@ -8,16 +7,18 @@ var db = require('../repository/employee');
  * employee Employee employee info to add (optional)
  * no response value expected for this operation
  **/
-exports.addEmployee = function(employee, res) {
+exports.addEmployee = function(employee) {
   return new Promise(function(resolve, reject) {
-    console.log(res.statusCode);
+ 
     const values = [employee.name, employee.title, employee.department, employee.location];
     db.setEmployee(function(err, data) {
       var dataEmp = {};
-      if ( err ) return console.error( err );
-      console.log(Object.keys(data));
-      dataEmp['message'] = "Employee created.";
-  
+      if ( err ) (
+        dataEmp['error'] = err
+      );
+      else{
+        dataEmp['message'] = "Employee created.";
+      }
       if (Object.keys(dataEmp).length > 0) {
         // console.log(Object.keys(data)[0]);
         resolve(dataEmp);
@@ -62,7 +63,7 @@ exports.listingEmployees = function(page_id,limit) {
     dataEmp['employee'] = JSON.parse(JSON.stringify(data.rows));
 
     if (Object.keys(dataEmp).length > 0) {
-      // console.log(Object.keys(data)[0]);
+       // console.log(Object.keys(data)[0]);
       resolve(dataEmp);
     } else {
       resolve();
