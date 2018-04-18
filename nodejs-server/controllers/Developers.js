@@ -7,7 +7,7 @@ module.exports.addEmployee = function addEmployee (req, res, next) {
   var employee = req.swagger.params['employee'].value;
   Developers.addEmployee(employee)
     .then(function (response) {
-      utils.writeJson(res, response);
+      utils.writeJson(res, response, 201);
     })
     .catch(function (response) {
       utils.writeJson(res, response);
@@ -18,7 +18,7 @@ module.exports.deleteEmployee = function deleteEmployee (req, res, next) {
   var id = req.swagger.params['id'].value;
   Developers.deleteEmployee(id)
     .then(function (response) {
-      utils.writeJson(res, response);
+      utils.writeJson(res, response, 201);
     })
     .catch(function (response) {
       utils.writeJson(res, response);
@@ -43,6 +43,7 @@ module.exports.searchEmployees = function searchEmployees (req, res, next) {
   var title = req.swagger.params['title'].value;
   var department = req.swagger.params['department'].value;
   var location = req.swagger.params['location'].value;
+  
   Developers.searchEmployees(name,title,department,location)
     .then(function (response) {
       utils.writeJson(res, response);
@@ -57,7 +58,7 @@ module.exports.updateEmployee = function updateEmployee (req, res, next) {
   var employee = req.swagger.params['employee'].value;
   Developers.updateEmployee(id,employee)
     .then(function (response) {
-      utils.writeJson(res, response);
+      utils.writeJson(res, response, 201);
     })
     .catch(function (response) {
       utils.writeJson(res, response);

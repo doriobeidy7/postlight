@@ -42,13 +42,15 @@ exports.deleteEmployee = function(id) {
     const values = [id];
     db.deleteEmployee(function(err, data) {
       var dataEmp = {};
-      if ( err ) {
+      if ( err ) (
         dataEmp['error'] = err
-    }
+      );
       else{
-        dataEmp['message'] = "Employee deleted.";
-    };
+        dataEmp['message'] = "Employee deleted."
+      }
+
       if (Object.keys(dataEmp).length > 0) {
+        
         // console.log(Object.keys(data)[0]);
         resolve(dataEmp);
       } else {
@@ -75,7 +77,7 @@ exports.listingEmployees = function(page_id,limit) {
     var dataEmp = {};
     if ( err ) return console.error( err );
 
-    dataEmp['employee'] = JSON.parse(JSON.stringify(data.rows));
+    dataEmp['employee'] = data.rows;
 
     if (Object.keys(dataEmp).length > 0) {
        // console.log(Object.keys(data)[0]);
@@ -100,28 +102,23 @@ exports.listingEmployees = function(page_id,limit) {
  **/
 exports.searchEmployees = function(name,title,department,location) {
   return new Promise(function(resolve, reject) {
-   
-    var examples = {};
-    examples['application/json'] = [ {
-  "emp_image" : "https://wd.imagelocation.com",
-  "name" : "Joe",
-  "location" : "beirut",
-  "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-  "title" : "Senior developer",
-  "department" : "Mobiles"
-}, {
-  "emp_image" : "https://wd.imagelocation.com",
-  "name" : "Joe",
-  "location" : "beirut",
-  "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-  "title" : "Senior developer",
-  "department" : "Mobiles"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    const values = [name];
+
+    db.searchEmployee(function(err, data) {
+      var dataEmp = {};
+      if ( err ) (
+        dataEmp['error'] = err
+      );
+      else{
+        dataEmp['employee'] = data.rows;
+      }
+      if (Object.keys(dataEmp).length > 0) {
+        // console.log(Object.keys(data)[0]);
+        resolve(dataEmp);
+      } else {
+        resolve();
+      }
+    }, values);
   });
 }
 
@@ -139,12 +136,12 @@ exports.updateEmployee = function(id,employee) {
     const values = [employee.name, employee.title, employee.department, employee.location, id];
     db.updateEmployee(function(err, data) {
       var dataEmp = {};
-      if ( err ) {
+      if ( err ) (
         dataEmp['error'] = err
-    }
+      );
       else{
         dataEmp['message'] = "Employee updated.";
-    };
+      }
       if (Object.keys(dataEmp).length > 0) {
         // console.log(Object.keys(data)[0]);
         resolve(dataEmp);

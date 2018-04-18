@@ -53,7 +53,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
   // error middleware for errors that occurred in middleware
   app.use(function onerror(err, req, res, next) {
     
-    // console.log(res.statusCode);
+    console.log(res.statusCode);
     // an error occurred!
     if (res.statusCode === 400) {
       next(new Error("please make sure all data are valid!"));

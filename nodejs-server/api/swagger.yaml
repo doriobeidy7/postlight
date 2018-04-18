@@ -110,7 +110,7 @@ paths:
         schema:
           $ref: "#/definitions/Employee"
       responses:
-        200:
+        201:
           description: "item created"
         400:
           description: "invalid input, object invalid"
