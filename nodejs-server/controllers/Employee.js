@@ -1,6 +1,6 @@
 'use strict';
 var utils = require('../utils/writer.js');
-var Developers = require('../service/DevelopersService');
+var Developers = require('../service/EmployeeService');
 
 
 module.exports.addEmployee = function addEmployee (req, res, next) {

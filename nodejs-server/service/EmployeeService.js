@@ -1,5 +1,5 @@
 'use strict';
-var db = require('../repository/employee');
+var db = require('../repository/employeeRepository');
 /**
  * adds an employee
  * Adds an employee to the system

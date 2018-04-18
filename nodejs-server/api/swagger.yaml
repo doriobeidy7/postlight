@@ -12,15 +12,15 @@ info:
 host: "virtserver.swaggerhub.com"
 basePath: "/postlight"
 tags:
-- name: "developers"
-  description: "Operations available to regular developers"
+- name: "Employee"
+  description: "Operations available to regular Employee"
 schemes:
 - "https"
 paths:
   /employee/search:
     get:
       tags:
-      - "developers"
+      - "Employee"
       summary: "search employee"
       description: "By passing in the appropriate options, you can search for available\
         \ employee in the system"
@@ -57,11 +57,11 @@ paths:
               $ref: "#/definitions/Employee"
         400:
           description: "bad input parameter"
-      x-swagger-router-controller: "Developers"
+      x-swagger-router-controller: "Employee"
   /employee:
     get:
       tags:
-      - "developers"
+      - "Employee"
       summary: "listing employees"
       description: "By passing in the appropriate options, you can get a list of available\
         \ employee in the system"
@@ -91,10 +91,10 @@ paths:
               $ref: "#/definitions/Employee"
         400:
           description: "bad input parameter"
-      x-swagger-router-controller: "Developers"
+      x-swagger-router-controller: "Employee"
     post:
       tags:
-      - "developers"
+      - "Employee"
       summary: "adds an employee"
       description: "Adds an employee to the system"
       operationId: "addEmployee"
@@ -116,10 +116,10 @@ paths:
           description: "invalid input, object invalid"
         409:
           description: "an existing item already exists"
-      x-swagger-router-controller: "Developers"
+      x-swagger-router-controller: "Employee"
     put:
       tags:
-      - "developers"
+      - "Employee"
       summary: "update an employee"
       description: "Update an employee in the system"
       operationId: "updateEmployee"
@@ -144,10 +144,10 @@ paths:
           description: "item updated"
         400:
           description: "invalid input, employee not found"
-      x-swagger-router-controller: "Developers"
+      x-swagger-router-controller: "Employee"
     delete:
       tags:
-      - "developers"
+      - "Employee"
       summary: "delete an employee"
       description: "Delete an employee in the system"
       operationId: "deleteEmployee"
@@ -166,7 +166,7 @@ paths:
           description: "item deleted"
         400:
           description: "invalid input, employee not found"
-      x-swagger-router-controller: "Developers"
+      x-swagger-router-controller: "Employee"
 definitions:
   Employee:
     type: "object"
