@@ -72,7 +72,14 @@ exports.deleteEmployee = function(id) {
 
 exports.listingEmployees = function(page_id,limit) {
   return new Promise(function(resolve, reject) {
-  
+   if(limit == null){
+     limit = 10;
+   }
+   if(page_id == null){
+    page_id = 0;
+  }
+  const offset = page_id * limit;
+  const values = [limit, offset];
   db.getEmployees(function( err, data ) {
     var dataEmp = {};
     if ( err ) return console.error( err );
@@ -85,7 +92,7 @@ exports.listingEmployees = function(page_id,limit) {
     } else {
       resolve();
     }
-  });
+  }, values);
 });
 }
 

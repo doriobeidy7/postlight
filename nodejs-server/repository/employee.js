@@ -1,6 +1,10 @@
 const pool = require('./connection');
-module.exports.getEmployees = function (callback) {
-  pool.query('SELECT * from employees ORDER BY id ASC', callback);
+module.exports.getEmployees = function (callback, valuesData) {
+  const query = {
+    text: 'SELECT * from employees ORDER BY id limit ($1) offset ($2)',
+    values: valuesData
+  }
+  pool.query(query, callback);
 }
 
 module.exports.setEmployee = function (callback, valuesData) {
