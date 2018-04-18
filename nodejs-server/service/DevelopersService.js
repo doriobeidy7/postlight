@@ -39,7 +39,22 @@ exports.addEmployee = function(employee) {
  **/
 exports.deleteEmployee = function(id) {
   return new Promise(function(resolve, reject) {
-    resolve();
+    const values = [id];
+    db.deleteEmployee(function(err, data) {
+      var dataEmp = {};
+      if ( err ) {
+        dataEmp['error'] = err
+    }
+      else{
+        dataEmp['message'] = "Employee deleted.";
+    };
+      if (Object.keys(dataEmp).length > 0) {
+        // console.log(Object.keys(data)[0]);
+        resolve(dataEmp);
+      } else {
+        resolve();
+      }
+    }, values);
   });
 }
 

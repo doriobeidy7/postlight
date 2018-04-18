@@ -22,3 +22,13 @@ module.exports.updateEmployee = function(callback, valuesData) {
     // callback
     pool.query(query, callback);
   }
+
+  module.exports.deleteEmployee = function(callback, valuesData) {
+    console.log(valuesData);
+      const query = {
+        text: 'DELETE FROM employees WHERE id=($1)',
+        values: valuesData
+      }
+      // callback
+      pool.query(query, callback);
+    }
