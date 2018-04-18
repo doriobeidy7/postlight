@@ -16,7 +16,7 @@ console.log(valuesData);
 module.exports.updateEmployee = function(callback, valuesData) {
   console.log(valuesData);
     const query = {
-      text: 'UPDATE employees SET name=($1), title=($2), deparment=($3), location=($4)',
+      text: 'update employees SET name=($1), title=($2), department=($3), location=($4) WHERE id=($5)',
       values: valuesData
     }
     // callback

@@ -121,7 +121,22 @@ exports.searchEmployees = function(name,title,department,location) {
  **/
 exports.updateEmployee = function(id,employee) {
   return new Promise(function(resolve, reject) {
-    resolve();
+    const values = [employee.name, employee.title, employee.department, employee.location, id];
+    db.updateEmployee(function(err, data) {
+      var dataEmp = {};
+      if ( err ) {
+        dataEmp['error'] = err
+    }
+      else{
+        dataEmp['message'] = "Employee updated.";
+    };
+      if (Object.keys(dataEmp).length > 0) {
+        // console.log(Object.keys(data)[0]);
+        resolve(dataEmp);
+      } else {
+        resolve();
+      }
+    }, values);
   });
 }
 
