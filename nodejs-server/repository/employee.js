@@ -39,7 +39,7 @@ module.exports.deleteEmployee = function (callback, valuesData) {
 
 module.exports.searchEmployee = function (callback, valuesData) {
   const query = {
-    text: 'SELECT * from employees WHERE name=($1) ORDER BY id ASC',
+    text: 'SELECT * from employees WHERE LOWER(name) LIKE LOWER($1) OR LOWER(title) LIKE LOWER($2) OR LOWER(department) LIKE LOWER($3) OR LOWER(location) LIKE LOWER($4)',
     values: valuesData
   }
   // callback

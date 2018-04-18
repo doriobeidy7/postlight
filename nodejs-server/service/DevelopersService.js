@@ -7,16 +7,16 @@ var db = require('../repository/employee');
  * employee Employee employee info to add (optional)
  * no response value expected for this operation
  **/
-exports.addEmployee = function(employee) {
-  return new Promise(function(resolve, reject) {
- 
+exports.addEmployee = function (employee) {
+  return new Promise(function (resolve, reject) {
+
     const values = [employee.name, employee.title, employee.department, employee.location];
-    db.setEmployee(function(err, data) {
+    db.setEmployee(function (err, data) {
       var dataEmp = {};
-      if ( err ) (
+      if (err) (
         dataEmp['error'] = err
       );
-      else{
+      else {
         dataEmp['message'] = "Employee created.";
       }
       if (Object.keys(dataEmp).length > 0) {
@@ -37,20 +37,20 @@ exports.addEmployee = function(employee) {
  * id String pass employee id to delete a record
  * no response value expected for this operation
  **/
-exports.deleteEmployee = function(id) {
-  return new Promise(function(resolve, reject) {
+exports.deleteEmployee = function (id) {
+  return new Promise(function (resolve, reject) {
     const values = [id];
-    db.deleteEmployee(function(err, data) {
+    db.deleteEmployee(function (err, data) {
       var dataEmp = {};
-      if ( err ) (
+      if (err) (
         dataEmp['error'] = err
       );
-      else{
+      else {
         dataEmp['message'] = "Employee deleted."
       }
 
       if (Object.keys(dataEmp).length > 0) {
-        
+
         // console.log(Object.keys(data)[0]);
         resolve(dataEmp);
       } else {
@@ -70,30 +70,30 @@ exports.deleteEmployee = function(id) {
  **/
 
 
-exports.listingEmployees = function(page_id,limit) {
-  return new Promise(function(resolve, reject) {
-   if(limit == null){
-     limit = 10;
-   }
-   if(page_id == null){
-    page_id = 0;
-  }
-  const offset = page_id * limit;
-  const values = [limit, offset];
-  db.getEmployees(function( err, data ) {
-    var dataEmp = {};
-    if ( err ) return console.error( err );
-
-    dataEmp['employee'] = data.rows;
-
-    if (Object.keys(dataEmp).length > 0) {
-       // console.log(Object.keys(data)[0]);
-      resolve(dataEmp);
-    } else {
-      resolve();
+exports.listingEmployees = function (page_id, limit) {
+  return new Promise(function (resolve, reject) {
+    if (limit == null) {
+      limit = 10;
     }
-  }, values);
-});
+    if (page_id == null) {
+      page_id = 0;
+    }
+    const offset = page_id * limit;
+    const values = [limit, offset];
+    db.getEmployees(function (err, data) {
+      var dataEmp = {};
+      if (err) return console.error(err);
+
+      dataEmp['employee'] = data.rows;
+
+      if (Object.keys(dataEmp).length > 0) {
+        // console.log(Object.keys(data)[0]);
+        resolve(dataEmp);
+      } else {
+        resolve();
+      }
+    }, values);
+  });
 }
 
 
@@ -107,16 +107,16 @@ exports.listingEmployees = function(page_id,limit) {
  * location String pass a location for looking up in records (optional)
  * returns List
  **/
-exports.searchEmployees = function(name,title,department,location) {
-  return new Promise(function(resolve, reject) {
-    const values = [name];
+exports.searchEmployees = function (name, title, department, location) {
+  return new Promise(function (resolve, reject) {
+    const values = ["%"+name+"%", "%"+title+"%", "%"+department+"%", "%"+location+"%"];
 
-    db.searchEmployee(function(err, data) {
+    db.searchEmployee(function (err, data) {
       var dataEmp = {};
-      if ( err ) (
+      if (err) (
         dataEmp['error'] = err
       );
-      else{
+      else {
         dataEmp['employee'] = data.rows;
       }
       if (Object.keys(dataEmp).length > 0) {
@@ -138,15 +138,15 @@ exports.searchEmployees = function(name,title,department,location) {
  * employee Employee employee info to udpate (optional)
  * no response value expected for this operation
  **/
-exports.updateEmployee = function(id,employee) {
-  return new Promise(function(resolve, reject) {
+exports.updateEmployee = function (id, employee) {
+  return new Promise(function (resolve, reject) {
     const values = [employee.name, employee.title, employee.department, employee.location, id];
-    db.updateEmployee(function(err, data) {
+    db.updateEmployee(function (err, data) {
       var dataEmp = {};
-      if ( err ) (
+      if (err) (
         dataEmp['error'] = err
       );
-      else{
+      else {
         dataEmp['message'] = "Employee updated.";
       }
       if (Object.keys(dataEmp).length > 0) {
