@@ -10,10 +10,16 @@ import UIKit
 
 
 
-class EmpTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class EmpTableViewController: UIViewController{
     
     @IBOutlet var tableView: UITableView!
-    fileprivate var dataArray = [EmpTableViewDataModelItem]()
+    private let dataSource = EmpTableViewDataModel()
+    
+    fileprivate var dataArray = [EmpTableViewDataModelItem]() {
+        didSet {
+            tableView?.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +29,13 @@ class EmpTableViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.backgroundColor = UIColor.clear
         tableView.separatorColor = UIColor.clear
         tableView.register(EmpCell.nib, forCellReuseIdentifier: EmpCell.identifier)
+        dataSource.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         
+        dataSource.requestData()
     }
     
 }
@@ -41,7 +53,7 @@ extension EmpTableViewController: UITableViewDataSource {
             cell.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
             cell.backgroundColor = UIColor.clear
             cell.titleLabel.text = dataArray[row].title
-            
+            cell.configureWithItem(item: dataArray[indexPath.item])
             return cell
         }
         
@@ -61,5 +73,15 @@ extension EmpTableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+    }
+}
+
+extension EmpTableViewController: EmpTableViewDataModelDelegate {
+    func didFailDataUpdateWithError(error: Error) {
+        print("error: \(error.localizedDescription)")
+    }
+    
+    func didRecieveDataUpdate(data: [EmpTableViewDataModelItem]) {
+        dataArray = data
     }
 }

@@ -9,11 +9,6 @@
 import UIKit
 class EmpCell: UITableViewCell {
     
-    let nameLabel = UILabel()
-    let titleLabel = UILabel()
-    let departmentLabel = UILabel()
-    let lcoationLabel = UILabel()
-    
     class var identifier: String {
         return String(describing: self)
     }
@@ -21,12 +16,22 @@ class EmpCell: UITableViewCell {
         return UINib(nibName: identifier, bundle: nil)
     }
     
+    let nameLabel = UILabel()
+    let titleLabel = UILabel()
+    let departmentLabel = UILabel()
+    let lcoationLabel = UILabel()
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+    }
+    
     func configureWithItem(item: EmpTableViewDataModelItem) {
 
-        nameLabel?.text = item.name
-        titleLabel?.text = item.title
-        departmentLabel?.text = item.department
-        lcoationLabel?.text = item.location
+        nameLabel.text = item.name
+        titleLabel.text = item.title
+        departmentLabel.text = item.department
+        lcoationLabel.text = item.location
         //setImageWithURL(url: item.ImageURL)
     }
     
