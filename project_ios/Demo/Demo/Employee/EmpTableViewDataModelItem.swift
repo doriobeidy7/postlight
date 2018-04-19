@@ -16,13 +16,13 @@ class EmpTableViewDataModelItem {
     
     
     //initialize data
-    init?(data: [String: String]?) {
-        if let data = data, let emp_image = data["emp_image"], let name = data["name"], let title = data["title"], let department = data["department"], let location = data["location"] {
-            self.ImageURL = emp_image
-            self.name = name
-            self.title = title
-            self.department = department
-            self.location = location
+    init?(data: NSDictionary?) {
+        if let data = data, let name = data["name"], let title = data["title"], let department = data["department"], let location = data["location"] {
+//            self.ImageURL = emp_image as? String
+            self.name = name as? String
+            self.title = title as? String
+            self.department = department as? String
+            self.location = location as? String
         } else {
             return nil
         }

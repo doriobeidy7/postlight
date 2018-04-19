@@ -17,7 +17,10 @@ class EmpTableViewController: UIViewController{
     
     fileprivate var dataArray = [EmpTableViewDataModelItem]() {
         didSet {
-            tableView?.reloadData()
+            //Reload tableview after receiving data using EmpTableViewDataModelDelegate protocol to get data.
+             DispatchQueue.main.async(execute: { () -> Void in
+                self.tableView?.reloadData()
+             })
         }
     }
     
@@ -28,7 +31,7 @@ class EmpTableViewController: UIViewController{
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.clear
         tableView.separatorColor = UIColor.clear
-        tableView.register(EmpCell.nib, forCellReuseIdentifier: EmpCell.identifier)
+        tableView.register(EmpCell.self, forCellReuseIdentifier: EmpCell.identifier)
         dataSource.delegate = self
     }
     
@@ -49,10 +52,11 @@ extension EmpTableViewController: UITableViewDataSource {
         // safe-unwrap => if it succeeds, => return custom cell.
         if let cell = tableView.dequeueReusableCell(withIdentifier: EmpCell.identifier, for: indexPath) as? EmpCell
         {
-            let row = indexPath.row
-            cell.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-            cell.backgroundColor = UIColor.clear
-            cell.titleLabel.text = dataArray[row].title
+//            let row = indexPath.row
+//            cell.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+//            cell.backgroundColor = UIColor.clear
+//            cell.titleLabel.text = dataArray[row].title
+//            print(dataArray)
             cell.configureWithItem(item: dataArray[indexPath.item])
             return cell
         }
@@ -83,5 +87,6 @@ extension EmpTableViewController: EmpTableViewDataModelDelegate {
     
     func didRecieveDataUpdate(data: [EmpTableViewDataModelItem]) {
         dataArray = data
+//          print(data)
     }
 }

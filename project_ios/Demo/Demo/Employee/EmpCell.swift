@@ -42,7 +42,7 @@ class EmpCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
-        backgroundColor = .clear
+        backgroundColor = UIColor.black
         
         titleLabel.frame = CGRect(x: 10, y: 0, width: widthResize(300), height: 50)
         titleLabel.textAlignment = .left

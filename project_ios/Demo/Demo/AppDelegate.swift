@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import SystemConfiguration
 
-let main_url = ""
+let main_url = "http://localhost:3001/postlight"
 var appDelegate = AppDelegate()
 let defaults = UserDefaults.standard
 
