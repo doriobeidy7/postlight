@@ -21,6 +21,8 @@ extension UIColor {
     convenience init(netHex:Int) {
         self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
     }
+    
+    static let employeeOrange = UIColor(netHex: 0xf8b20e)
 }
 
 extension UITextField{
@@ -159,4 +161,5 @@ extension UITableView {
             }
         }
     }
+    
 }

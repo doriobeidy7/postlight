@@ -105,9 +105,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let barButtonAppearance = UIBarButtonItem.appearance()
-        barButtonAppearance.tintColor = UIColor(netHex: 0x555555)
-        window?.tintColor = UIColor(netHex: 0xf8b20e)
+        //set theme color for search bar and navigation bar
+        UISearchBar.appearance().tintColor = UIColor.employeeOrange
+        UINavigationBar.appearance().tintColor = UIColor.employeeOrange
         
         // Override point for customization after application launch.
         return true
