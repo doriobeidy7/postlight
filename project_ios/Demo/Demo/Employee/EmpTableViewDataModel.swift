@@ -16,17 +16,8 @@ protocol EmpTableViewDataModelDelegate: class {
 class EmpTableViewDataModel:NSObject {
     
     weak var delegate: EmpTableViewDataModelDelegate?
-
     
-    func requestData() {
-       
-        getEmployeeData()
-   
-    }
-    
-    private func handleError(error: Error) {
-        
-    }
+    private func handleError(error: Error) {}
     
     private func setDataWithResponse(response: [AnyObject]) {
        
@@ -35,18 +26,17 @@ class EmpTableViewDataModel:NSObject {
             if let empTableViewDataModelItem = EmpTableViewDataModelItem(data: item as? NSDictionary) {
                 
                 data.append(empTableViewDataModelItem)
-//                print(data)
             }
         }
         delegate?.didRecieveDataUpdate(data: data)
     }
     
     
-    func getEmployeeData() {
+    func getEmployee(page_id:Int, limit:Int) {
         
-        let url = main_url+"/employee?page_id=0&limit=4"
+        let url = main_url+"/employee?page_id="+String(page_id)+"&limit="+String(limit)
         let jsParser = Json_Parser()
-    
+        
         // you call the method with a trailing closure
         jsParser.jsonParseGet(url) {jsonString, statuscode in
             
@@ -59,17 +49,18 @@ class EmpTableViewDataModel:NSObject {
                 data = jsonString as? NSDictionary
                 let newdata = data?.value(forKey: "employee") as? NSArray
      
-//                print(newdata!)
                 if let error = error {
                     self.delegate?.didFailDataUpdateWithError(error: error)
                 } else if newdata != nil {
-                    self.setDataWithResponse(response: newdata! as [AnyObject])
+
+               
+                        self.setDataWithResponse(response: newdata! as [AnyObject])
+                        
+                    
                 }
                 
                 DispatchQueue.main.async(execute: { () -> Void in
-                    //            //reload your tableView
-//                    self.reloadData()
-                    
+
                 })
                 
                 

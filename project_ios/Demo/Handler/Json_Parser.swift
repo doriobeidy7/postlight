@@ -169,11 +169,7 @@ class Json_Parser: UIViewController, NSURLConnectionDelegate {
                     let alertTitle = "Connection error."
                     let alertMessage = "No Internet Connection"
                     let retryButton = "Ok"
-                    
-                    
-                  
-                    
-                    
+            
                     let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
                     
                     alertController.addAction(UIAlertAction(title: retryButton, style: UIAlertActionStyle.default, handler: {

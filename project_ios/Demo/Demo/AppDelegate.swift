@@ -47,12 +47,7 @@ func heightResize(_ objw: CGFloat, objh: CGFloat)-> CGFloat {
 }
 
 
-var Navbar_Title : String = ""
-var Navbar_Font : String = ""
-var Navbar_icon : String = ""
-
 let userDefaults = UserDefaults.standard
-var sema = DispatchSemaphore( value: 0 )
 
 func isInternetAvailable() -> Bool {
     
