@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class EmpTableViewController: UIViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
@@ -17,6 +15,7 @@ class EmpTableViewController: UIViewController {
     private let dataSource = EmpTableViewDataModel()
     var page_id_count = 0
     var rowNumber = 0
+    var detailViewController: EmpDetailsViewController? = nil
     
     var searchedEmployee = [EmpTableViewDataModelItem]()
     fileprivate var dataArray = [EmpTableViewDataModelItem]() {
@@ -57,7 +56,8 @@ class EmpTableViewController: UIViewController {
         // Setup the Filter Bar
         searchController.searchBar.scopeButtonTitles = ["Name", "Title", "Department", "Location"]
         searchController.searchBar.delegate = self
-       
+ 
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -103,13 +103,26 @@ extension EmpTableViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        self.performSegue(withIdentifier: "showDetail", sender: tableView)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return heightResize(1080, objh: 400)
     }
     
+    // MARK: - Segues
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail" {
+            
+            if let navVC = segue.destination as? UINavigationController{
+                if let empVC: EmpDetailsViewController = navVC.visibleViewController as? EmpDetailsViewController{
+//                    empVC.detailItem = barcodeInt as AnyObject
+                }
+            }
+            
+
+        }
+    }
     
     // MARK: - Private instance methods
     //clear tableView before loading searched data

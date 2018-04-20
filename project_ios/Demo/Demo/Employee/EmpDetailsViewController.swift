@@ -1,18 +1,17 @@
 //
-//  DetailsViewController.swift
+//  EmpDetailsViewController.swift
 //  Demo
 //
-//  Created by Dori on 4/19/18.
+//  Created by Dori on 4/21/18.
 //  Copyright © 2018 Dori. All rights reserved.
 //
 
 import UIKit
-class DetailsViewController: UIViewController {
+
+class EmpDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
-    
-    
 }

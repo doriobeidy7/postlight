@@ -22,15 +22,15 @@
                                 <rect key="frame" x="0.0" y="116" width="375" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EmployeeCell" rowHeight="179" id="ZYs-Fa-40Z" customClass="EmpCell" customModule="Demo" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EmployeeCell" rowHeight="179" id="ZYs-Fa-40Z" customClass="EmpCell" customModule="Demo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="179"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZYs-Fa-40Z" id="f5l-bv-ohx">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="178.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="178.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Dnq-fx-BXR" kind="showDetail" id="65t-nZ-pmr"/>
+                                            <segue destination="Dnq-fx-BXR" kind="show" identifier="showDetail" id="65t-nZ-pmr"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -54,16 +54,17 @@
             </objects>
             <point key="canvasLocation" x="1093.5999999999999" y="1258.920539730135"/>
         </scene>
-        <!--Details View Controller-->
+        <!--Emp Details View Controller-->
         <scene sceneID="cIn-fn-m0J">
             <objects>
-                <viewController id="Dnq-fx-BXR" customClass="DetailsViewController" customModule="Demo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Dnq-fx-BXR" customClass="EmpDetailsViewController" customModule="Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XKF-Xo-uM2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="lbK-vP-hPG"/>
                     </view>
+                    <navigationItem key="navigationItem" id="pRP-ts-aM3"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2HV-45-yoM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
