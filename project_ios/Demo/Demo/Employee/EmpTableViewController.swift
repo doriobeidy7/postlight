@@ -97,7 +97,7 @@ extension EmpTableViewController: UITableViewDataSource {
     }
     
   
-    // custom delete / update row 
+    // custom delete / update row
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let delAction:UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.destructive, title: "delete", handler: {_,_ in

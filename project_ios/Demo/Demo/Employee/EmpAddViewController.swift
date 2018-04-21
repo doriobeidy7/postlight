@@ -38,6 +38,7 @@ class EmpAddViewController: UIViewController {
     
     }
     
+    //Create button funcationality
     @IBAction func btn_create_action(_ sender: UIButton) {
         
         e_name = tf_name.text!
@@ -62,6 +63,7 @@ class EmpAddViewController: UIViewController {
         
     }
     
+    // check if a field is empty
     func checkIsEmpty(fieldName: String) -> Bool {
         if(fieldName == ""){
                 let msg = "Please make sure to fill all fields"
@@ -74,12 +76,12 @@ class EmpAddViewController: UIViewController {
     }
     
     
-    
+    //Post Employee data http request
     func posttEmployee(postData: NSDictionary) {
         
         let url = main_url+"/employee"
         let jsParser = Json_Parser()
-        print(postData)
+       
         // you call the method with a trailing closure
         jsParser.jsonParsePostD(url, post: postData) {jsonString, statuscode in
             if(statuscode ==  201){
