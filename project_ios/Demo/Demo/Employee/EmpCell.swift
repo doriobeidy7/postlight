@@ -31,11 +31,10 @@ class EmpCell: UITableViewCell {
     func configureWithItem(item: EmpTableViewDataModelItem) {
 
         emp_id  = item.id!
-        print(emp_id)
-        nameLabel.text = item.name
-        titleLabel.text = item.title
-        departmentLabel.text = item.department
-        lcoationLabel.text = item.location
+        nameLabel.text = "Name: " + item.name!
+        titleLabel.text =  "Title: " + item.title!
+        departmentLabel.text =  "Department: " + item.department!
+        lcoationLabel.text =  "Location: " + item.location!
         //setImageWithURL(url: item.ImageURL)
     }
     

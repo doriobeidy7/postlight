@@ -21,10 +21,10 @@ class EmpTableViewDataModelItem {
         if let data = data, let id = data["id"], let name = data["name"], let title = data["title"], let department = data["department"], let location = data["location"] {
 //            self.ImageURL = emp_image as? String
             self.id = id as? Int
-            self.name = "Name: " + (name as? String)!
-            self.title = "Title: " + (title as? String)!
-            self.department = "Department: " + (department as? String)!
-            self.location = "Location: " + (location as? String)!
+            self.name =  (name as? String)!
+            self.title = (title as? String)!
+            self.department = (department as? String)!
+            self.location =  (location as? String)!
         } else {
             return nil
         }

@@ -8,7 +8,9 @@
 
 import UIKit
 
+
 class EmpTableViewController: UIViewController {
+    
     
     let searchController = UISearchController(searchResultsController: nil)
     @IBOutlet var tableView: UITableView!
@@ -41,7 +43,7 @@ class EmpTableViewController: UIViewController {
         
         dataSource.delegate = self
         loadEmpList()
-        
+    
         
         // Setup the Search Controller
         searchController.searchBar.placeholder = "Search Employee"
@@ -67,6 +69,8 @@ class EmpTableViewController: UIViewController {
     func loadEmpList(){
         dataSource.getEmployee(page_id: page_id_count, limit: 5)
     }
+    
+    
 }
 
 
@@ -115,14 +119,14 @@ extension EmpTableViewController: UITableViewDataSource {
         
         
         let updtAction:UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.destructive, title: "update", handler: {_,_ in
-            let param: [String: String] = [
-                "name": "POPOPOP",
-                "title": "test",
-                "department": "onaaa",
-                "location": "loulou"]
+         
+           
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let EmpAddViewController = mainStoryboard.instantiateViewController(withIdentifier: "EmpAddViewController") as! EmpAddViewController
+            EmpAddViewController.dataArray = self.dataArray[indexPath.row]
+            self.navigationController?.pushViewController(EmpAddViewController, animated: true)
             
-          
-            self.updateEmployee(postData: param as NSDictionary, emp_id:  String(cell!.emp_id))
+            
         })
         updtAction.backgroundColor = UIColor.employeeOrange
         
@@ -212,49 +216,8 @@ extension EmpTableViewController: UISearchResultsUpdating {
 }
 
 
-//Handling delete and update request
+//Handling delete request
 extension EmpTableViewController{
-    //Update Employee data http request
-    //send data to update using dicationary and employee_id
-    func updateEmployee(postData: NSDictionary, emp_id:String) {
-        
-        let url = main_url+"/employee?id="+emp_id
-        let jsParser = Json_Parser()
-        
-        // you call the method with a trailing closure
-        jsParser.jsonParsePut(url, put: postData) {jsonString, statuscode in
-            if(statuscode ==  201){
-                
-                OperationQueue.main.addOperation(){
-                    if(jsonString["message"] != nil){
-                        let msg =  jsonString["message"] as! NSString
-                        let alert = UIAlertController(title: "Employee", message: String(describing: msg), preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in}))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                }
-                
-            }else if(statuscode ==  400){
-                
-                OperationQueue.main.addOperation(){
-                    
-                    if(jsonString["error"] != nil){
-                        let error =  jsonString["error"] as! NSDictionary
-                        let msg =  error["message"] as! NSString
-                        let alert = UIAlertController(title: "Employee", message: String(describing: msg), preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in}))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                }
-            }else{
-                print("smthg wrong = " + String(describing: statuscode))
-                
-            }
-        }
-        
-    }
-    
-    
     //Delete Employee data http request
     //send employee id to delete an employee
     func deleteEmployee(emp_id:String) {
