@@ -21,6 +21,7 @@ class EmpCell: UITableViewCell {
     let titleLabel = UILabel()
     let departmentLabel = UILabel()
     let lcoationLabel = UILabel()
+    var emp_id = Int()
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -29,6 +30,8 @@ class EmpCell: UITableViewCell {
     
     func configureWithItem(item: EmpTableViewDataModelItem) {
 
+        emp_id  = item.id!
+        print(emp_id)
         nameLabel.text = item.name
         titleLabel.text = item.title
         departmentLabel.text = item.department

@@ -56,7 +56,7 @@ class EmpAddViewController: UIViewController {
                 "name": self.e_name,
                 "title": self.e_title,
                 "department": self.e_department,
-                "location": self.e_location,
+                "location": self.e_location
                 ]
             self.posttEmployee(postData: param as NSDictionary)
         }
@@ -77,6 +77,11 @@ class EmpAddViewController: UIViewController {
     
     
     //Post Employee data http request
+    //send parameters:
+        //    "name": self.e_name,
+        //    "title": self.e_title,
+        //    "department": self.e_department,
+        //    "location": self.e_location
     func posttEmployee(postData: NSDictionary) {
         
         let url = main_url+"/employee"

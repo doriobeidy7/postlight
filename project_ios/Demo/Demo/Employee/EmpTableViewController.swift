@@ -100,8 +100,11 @@ extension EmpTableViewController: UITableViewDataSource {
     // custom delete / update row
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
+        
+        let cell =  tableView.cellForRow(at: indexPath) as? EmpCell
+        
         let delAction:UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.destructive, title: "delete", handler: {_,_ in
-            self.deleteEmployee(emp_id: "124")
+            self.deleteEmployee(emp_id: String(cell!.emp_id))
             self.dataArray.remove(at: indexPath.row)
             tableView.beginUpdates()
             self.tableView.deleteRows(at: [indexPath], with: .fade)
@@ -118,7 +121,8 @@ extension EmpTableViewController: UITableViewDataSource {
                 "department": "onaaa",
                 "location": "loulou"]
             
-            self.updateEmployee(postData: param as NSDictionary, emp_id: "124")
+          
+            self.updateEmployee(postData: param as NSDictionary, emp_id:  String(cell!.emp_id))
         })
         updtAction.backgroundColor = UIColor.employeeOrange
         

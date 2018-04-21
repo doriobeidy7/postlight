@@ -9,6 +9,7 @@ import UIKit
 
 class EmpTableViewDataModelItem {
     var ImageURL: String?
+    var id: Int?
     var name: String?
     var title: String?
     var department: String?
@@ -17,8 +18,9 @@ class EmpTableViewDataModelItem {
     
     //initialize data
     init?(data: NSDictionary?) {
-        if let data = data, let name = data["name"], let title = data["title"], let department = data["department"], let location = data["location"] {
+        if let data = data, let id = data["id"], let name = data["name"], let title = data["title"], let department = data["department"], let location = data["location"] {
 //            self.ImageURL = emp_image as? String
+            self.id = id as? Int
             self.name = "Name: " + (name as? String)!
             self.title = "Title: " + (title as? String)!
             self.department = "Department: " + (department as? String)!

@@ -53,7 +53,6 @@ class EmpTableViewDataModel:NSObject {
                     self.setDataWithResponse(response: newdata! as [AnyObject])
                 }
                 
-//                DispatchQueue.main.async(execute: { () -> Void in})
                 
             }else if(statuscode ==  400){
                 
@@ -99,9 +98,7 @@ class EmpTableViewDataModel:NSObject {
                 } else if newdata != nil {
                     self.setDataWithResponse(response: newdata! as [AnyObject])
                 }
-                
-//                DispatchQueue.main.async(execute: { () -> Void in})
-                
+
             }else if(statuscode ==  400){
                 
                 OperationQueue.main.addOperation(){
