@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0C34CA1660622CC4C8385ABB /* Pods_DemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C20A799274C4591176889B73 /* Pods_DemoTests.framework */; };
 		82322951208AA6C500D0C498 /* EmpDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82322950208AA6C500D0C498 /* EmpDetailsViewController.swift */; };
+		82322953208B454A00D0C498 /* EmpAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82322952208B454A00D0C498 /* EmpAddViewController.swift */; };
 		82422388201FB9B300625EAE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82422387201FB9B300625EAE /* Extensions.swift */; };
 		82718237202A4C9D00EC90E3 /* Json_Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82718236202A4C9D00EC90E3 /* Json_Parser.swift */; };
 		828688C2202A57AD00F41F82 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828688C1202A57AD00F41F82 /* Loader.swift */; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		82322950208AA6C500D0C498 /* EmpDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmpDetailsViewController.swift; sourceTree = "<group>"; };
+		82322952208B454A00D0C498 /* EmpAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmpAddViewController.swift; sourceTree = "<group>"; };
 		82422387201FB9B300625EAE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		82718236202A4C9D00EC90E3 /* Json_Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Json_Parser.swift; sourceTree = "<group>"; };
 		828688C1202A57AD00F41F82 /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				828EFF362088CBF7002399E0 /* EmpTableViewDataModelItem.swift */,
 				828EFF382088D316002399E0 /* EmpTableViewDataModel.swift */,
 				82322950208AA6C500D0C498 /* EmpDetailsViewController.swift */,
+				82322952208B454A00D0C498 /* EmpAddViewController.swift */,
 			);
 			path = Employee;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				82718237202A4C9D00EC90E3 /* Json_Parser.swift in Sources */,
 				82422388201FB9B300625EAE /* Extensions.swift in Sources */,
 				828688C2202A57AD00F41F82 /* Loader.swift in Sources */,
+				82322953208B454A00D0C498 /* EmpAddViewController.swift in Sources */,
 				828688C4202A57BE00F41F82 /* ImageLoader.swift in Sources */,
 				82DF1EFA2088ABAE007433B6 /* EmpCell.swift in Sources */,
 				82EF7291200D3C800052243C /* AppDelegate.swift in Sources */,

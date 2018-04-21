@@ -87,8 +87,6 @@ class Json_Parser: UIViewController, NSURLConnectionDelegate {
          
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.setValue(post.value(forKey: "X-OpenAM-Username") as? String, forHTTPHeaderField: "X-OpenAM-Username")
-            request.setValue(post.value(forKey: "X-OpenAM-Password") as? String, forHTTPHeaderField: "X-OpenAM-Password")
             if(defaults.object(forKey: "token") != nil){
                  let token:String = defaults.string(forKey: "token")!
                 if(token != ""){
@@ -97,7 +95,7 @@ class Json_Parser: UIViewController, NSURLConnectionDelegate {
                 }
             }
             
-            //request.httpBody = try! JSONSerialization.data(withJSONObject: post, options: .prettyPrinted)
+            request.httpBody = try! JSONSerialization.data(withJSONObject: post, options: .prettyPrinted)
             
         
            

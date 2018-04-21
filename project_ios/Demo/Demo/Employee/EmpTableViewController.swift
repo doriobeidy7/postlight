@@ -115,10 +115,15 @@ extension EmpTableViewController: UITableViewDataSource {
         if segue.identifier == "showDetail" {
             
             if let navVC = segue.destination as? UINavigationController{
-                if let empVC: EmpDetailsViewController = navVC.visibleViewController as? EmpDetailsViewController{
-//                    empVC.detailItem = barcodeInt as AnyObject
+                if let empdetailsVC: EmpDetailsViewController = navVC.visibleViewController as? EmpDetailsViewController{
+//                    empdetailsVC.detailItem = barcodeInt as AnyObject
+                }
+                
+                if let empaddVC: EmpAddViewController = navVC.visibleViewController as? EmpAddViewController{
+                    //    empaddVC.detailItem = barcodeInt as AnyObject
                 }
             }
+            
             
 
         }

@@ -28,7 +28,7 @@ extension UIColor {
 extension UITextField{
     func setPreferences()  {
         self.layer.masksToBounds = true
-        self.layer.cornerRadius = 20
+        self.layer.cornerRadius = 10
         self.layer.borderWidth = 1.5
         self.layer.borderColor = UIColor(netHex: 0x898989).cgColor
         
