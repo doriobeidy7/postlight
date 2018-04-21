@@ -36,7 +36,7 @@ class EmpAddViewController: UIViewController {
         tf_title.text = item.title!
         tf_department.text = item.department!
         tf_location.text = item.location!
-//        setImageWithURL(url: item.ImageURL!)
+//      setImageWithURL(url: item.ImageURL!)
         
          self.btn_create.setTitle("Update", for: .normal)
     }
@@ -49,6 +49,7 @@ class EmpAddViewController: UIViewController {
         
         if(dataArray != nil){
             self.configureWithItem(item: self.dataArray!)
+            self.navigationItem.title = "Update Employee"
         }
     }
     
@@ -65,7 +66,17 @@ class EmpAddViewController: UIViewController {
     
     //Create button funcationality
     @IBAction func btn_create_action(_ sender: UIButton) {
+        if(dataArray != nil){
+            update_action()
+        }
+        else{
+            create_action()
+        }
+       
         
+    }
+    
+    func update_action()  {
         e_name = tf_name.text!
         e_title = tf_name.text!
         e_department = tf_department.text!
@@ -75,17 +86,38 @@ class EmpAddViewController: UIViewController {
         let checkedTitle = checkIsEmpty(fieldName: e_title)
         let checkedDepart = checkIsEmpty(fieldName: e_department)
         let checkedLoc =  checkIsEmpty(fieldName: e_location)
-    
+        
         if(checkedName && checkedTitle && checkedDepart && checkedLoc){
             let param: [String: String] = [
                 "name": self.e_name,
                 "title": self.e_title,
                 "department": self.e_department,
                 "location": self.e_location
-                ]
+            ]
+            self.updateEmployee(updateData: param as NSDictionary, emp_id: String(emp_id))
+        }
+    }
+    
+    func create_action()  {
+        e_name = tf_name.text!
+        e_title = tf_name.text!
+        e_department = tf_department.text!
+        e_location = tf_location.text!
+        
+        let checkedName =  checkIsEmpty(fieldName: e_name)
+        let checkedTitle = checkIsEmpty(fieldName: e_title)
+        let checkedDepart = checkIsEmpty(fieldName: e_department)
+        let checkedLoc =  checkIsEmpty(fieldName: e_location)
+        
+        if(checkedName && checkedTitle && checkedDepart && checkedLoc){
+            let param: [String: String] = [
+                "name": self.e_name,
+                "title": self.e_title,
+                "department": self.e_department,
+                "location": self.e_location
+            ]
             self.posttEmployee(postData: param as NSDictionary)
         }
-        
     }
     
     // check if a field is empty
@@ -150,13 +182,13 @@ extension EmpAddViewController{
     
     //Update Employee data http request
     //send data to update using dicationary and employee_id
-    func updateEmployee(postData: NSDictionary, emp_id:String) {
+    func updateEmployee(updateData: NSDictionary, emp_id:String) {
         
         let url = main_url+"/employee?id="+emp_id
         let jsParser = Json_Parser()
         
         // you call the method with a trailing closure
-        jsParser.jsonParsePut(url, put: postData) {jsonString, statuscode in
+        jsParser.jsonParsePut(url, put: updateData) {jsonString, statuscode in
             if(statuscode ==  201){
                 
                 OperationQueue.main.addOperation(){
