@@ -101,7 +101,7 @@ extension EmpTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let delAction:UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.destructive, title: "delete", handler: {_,_ in
-            
+            self.deleteEmployee(emp_id: "124")
             self.dataArray.remove(at: indexPath.row)
             tableView.beginUpdates()
             self.tableView.deleteRows(at: [indexPath], with: .fade)
@@ -112,8 +112,13 @@ extension EmpTableViewController: UITableViewDataSource {
         
         
         let updtAction:UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.destructive, title: "update", handler: {_,_ in
+            let param: [String: String] = [
+                "name": "POPOPOP",
+                "title": "test",
+                "department": "onaaa",
+                "location": "loulou"]
             
-            
+            self.updateEmployee(postData: param as NSDictionary, emp_id: "124")
         })
         updtAction.backgroundColor = UIColor.employeeOrange
         
@@ -202,3 +207,87 @@ extension EmpTableViewController: UISearchResultsUpdating {
     }
 }
 
+
+//Handling delete and update request
+extension EmpTableViewController{
+    //Update Employee data http request
+    //send data to update using dicationary and employee_id
+    func updateEmployee(postData: NSDictionary, emp_id:String) {
+        
+        let url = main_url+"/employee?id="+emp_id
+        let jsParser = Json_Parser()
+        
+        // you call the method with a trailing closure
+        jsParser.jsonParsePut(url, put: postData) {jsonString, statuscode in
+            if(statuscode ==  201){
+                
+                OperationQueue.main.addOperation(){
+                    if(jsonString["message"] != nil){
+                        let msg =  jsonString["message"] as! NSString
+                        let alert = UIAlertController(title: "Employee", message: String(describing: msg), preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in}))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+                
+            }else if(statuscode ==  400){
+                
+                OperationQueue.main.addOperation(){
+                    
+                    if(jsonString["error"] != nil){
+                        let error =  jsonString["error"] as! NSDictionary
+                        let msg =  error["message"] as! NSString
+                        let alert = UIAlertController(title: "Employee", message: String(describing: msg), preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in}))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }else{
+                print("smthg wrong = " + String(describing: statuscode))
+                
+            }
+        }
+        
+    }
+    
+    
+    //Delete Employee data http request
+    //send employee id to delete an employee
+    func deleteEmployee(emp_id:String) {
+        
+        let url = main_url+"/employee?id="+emp_id
+        let jsParser = Json_Parser()
+        
+        // you call the method with a trailing closure
+        jsParser.jsonParseDelete(url, delete: [:]) {jsonString, statuscode in
+            if(statuscode ==  201){
+                
+                OperationQueue.main.addOperation(){
+                    if(jsonString["message"] != nil){
+                        let msg =  jsonString["message"] as! NSString
+                        let alert = UIAlertController(title: "Employee", message: String(describing: msg), preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in}))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+                
+            }else if(statuscode ==  400){
+                
+                OperationQueue.main.addOperation(){
+                    
+                    if(jsonString["error"] != nil){
+                        let error =  jsonString["error"] as! NSDictionary
+                        let msg =  error["message"] as! NSString
+                        let alert = UIAlertController(title: "Employee", message: String(describing: msg), preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in}))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }else{
+                print("smthg wrong = " + String(describing: statuscode))
+                
+            }
+        }
+        
+    }
+}

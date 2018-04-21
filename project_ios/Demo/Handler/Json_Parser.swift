@@ -209,20 +209,13 @@ class Json_Parser: UIViewController, NSURLConnectionDelegate {
     // JSON PASRSER (PUT)
     func jsonParsePut(_ url: String, put: NSDictionary, completion: @escaping (NSDictionary, NSNumber) -> ()) {
         if let url = URL(string: url) {
-            let token:String = defaults.string(forKey: "token")!
-            
             var request = URLRequest(url: url)
             request.httpMethod = "PUT"
             
              request.setValue("application/json", forHTTPHeaderField: "Content-Type")
      
-            if(token != "" && defaults.object(forKey: "token") != nil){
-                request.setValue("Token "+token, forHTTPHeaderField: "Authorization")
-            }
-            
 
             request.httpBody = try! JSONSerialization.data(withJSONObject: put, options:[])
-            // request.HTTPBody = put.dataUsingEncoding(NSUTF8StringEncoding)
             //
             
             let task = URLSession.shared.dataTask(with: request, completionHandler: {
@@ -274,14 +267,9 @@ class Json_Parser: UIViewController, NSURLConnectionDelegate {
     // JSON PASRSER (DELETE)
     func jsonParseDelete(_ url: String, delete: [String: Any], completion: @escaping (NSDictionary, NSNumber) -> ()) {
         if let url = URL(string: url) {
-            let tokenString:String = defaults.string(forKey: "token")!
-            print(tokenString)
-            
+           
             var request = URLRequest(url: url)
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            if(tokenString != "" && defaults.object(forKey: "token") != nil){
-                request.addValue("Token \(tokenString)", forHTTPHeaderField: "Authorization")
-            }
             request.httpMethod = "DELETE"
           //  request.httpBody = try! JSONSerialization.data(withJSONObject: delete, options:.prettyPrinted)
             let task = URLSession.shared.dataTask(with: request, completionHandler: {

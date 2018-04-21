@@ -28,6 +28,9 @@ class EmpTableViewDataModel:NSObject {
         delegate?.didRecieveDataUpdate(data: data)
     }
     
+    //Fetch employee list http request
+     //for pagination: page_id  as integer
+     //set limit number of row per page
     func getEmployee(page_id:Int, limit:Int) {
         
         let url = main_url+"/employee?page_id="+String(page_id)+"&limit="+String(limit)
@@ -72,6 +75,9 @@ class EmpTableViewDataModel:NSObject {
         
     }
     
+    //Search employee http request
+     //type is the selection of the filter
+     //text is the search string
     func searchEmployee(type: String,text: String) {
         
         let url = main_url+"/employee/search?"+type+"="+text
@@ -115,6 +121,7 @@ class EmpTableViewDataModel:NSObject {
         }
         
     }
+    
     
 }
 
