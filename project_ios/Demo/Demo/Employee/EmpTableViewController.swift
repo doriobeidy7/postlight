@@ -96,6 +96,29 @@ extension EmpTableViewController: UITableViewDataSource {
         return UITableViewCell()
     }
     
+  
+    // custom delete / update row 
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let delAction:UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.destructive, title: "delete", handler: {_,_ in
+            
+            self.dataArray.remove(at: indexPath.row)
+            tableView.beginUpdates()
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.endUpdates()
+        })
+        delAction.backgroundColor = UIColor.red
+        
+        
+        
+        let updtAction:UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.destructive, title: "update", handler: {_,_ in
+            
+            
+        })
+        updtAction.backgroundColor = UIColor.employeeOrange
+        
+        return [updtAction, delAction]
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return dynamic array count => make tableview rows equal to dataArray size
