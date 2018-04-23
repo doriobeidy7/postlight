@@ -37,8 +37,6 @@ class EmpCell: UITableViewCell {
         lcoationLabel.text =  "Location: " + item.location!
         //setImageWithURL(url: item.ImageURL)
     }
-    
-    
  
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

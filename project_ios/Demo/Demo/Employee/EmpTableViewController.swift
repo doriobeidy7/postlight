@@ -18,7 +18,7 @@ class EmpTableViewController: UIViewController {
     var page_id_count = 0
     var rowNumber = 0
     var detailViewController: EmpDetailsViewController? = nil
-    
+    var selectedRow = Int()
     var searchedEmployee = [EmpTableViewDataModelItem]()
     fileprivate var dataArray = [EmpTableViewDataModelItem]() {
         didSet {
@@ -32,6 +32,8 @@ class EmpTableViewController: UIViewController {
         }
     }
     
+ 
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -132,14 +134,20 @@ extension EmpTableViewController: UITableViewDataSource {
         
         return [updtAction, delAction]
     }
-    
+   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return dynamic array count => make tableview rows equal to dataArray size
         return dataArray.count 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "showDetail", sender: tableView)
+        selectedRow = indexPath.row
+
+        
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let EmpDetailsViewController = mainStoryboard.instantiateViewController(withIdentifier: "EmpDetailsViewController") as! EmpDetailsViewController
+        EmpDetailsViewController.dataArray = self.dataArray[indexPath.row]
+          self.navigationController?.pushViewController(EmpDetailsViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -149,19 +157,15 @@ extension EmpTableViewController: UITableViewDataSource {
     // MARK: - Segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
-            
             if let navVC = segue.destination as? UINavigationController{
                 if let empdetailsVC: EmpDetailsViewController = navVC.visibleViewController as? EmpDetailsViewController{
-//                    empdetailsVC.detailItem = barcodeInt as AnyObject
+                    print("test")
+                    empdetailsVC.dataArray = self.dataArray[selectedRow]
                 }
                 
                 if let empaddVC: EmpAddViewController = navVC.visibleViewController as? EmpAddViewController{
-                    //    empaddVC.detailItem = barcodeInt as AnyObject
                 }
             }
-            
-            
-
         }
     }
     

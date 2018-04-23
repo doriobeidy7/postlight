@@ -24,9 +24,7 @@ class EmpAddViewController: UIViewController {
     var e_title :String = ""
     var e_department :String = ""
     var e_location :String = ""
-  
     
-
     var dataArray = EmpTableViewDataModelItem(data: [:])
     
     func configureWithItem(item: EmpTableViewDataModelItem) {
