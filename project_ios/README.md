@@ -4,10 +4,12 @@ Download ios demo project
 Demo
 ```
 
-Run it in the simulator only 
+Run it in the simulator only  
 ```
 localhost api
 ```
+
+to make the project running in the device you should move the server from localhost to a host and change the server configuration
 
 In this project you will be able to get employee list, create new epmloyee, delete employee, update employee and search employee
 
