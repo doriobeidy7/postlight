@@ -24,16 +24,16 @@ class EmpTableViewController: UIViewController {
         didSet {
             
             //Reload tableview after receiving data using EmpTableViewDataModelDelegate protocol to get data.
-             DispatchQueue.main.async(execute: { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 self.tableView?.reloadData()
                 self.page_id_count =  self.page_id_count + 1
                 self.tableView.tableViewScrollToBottom(animated: true, rowNumber: self.rowNumber)
-             })
+            })
         }
     }
     
- 
-  
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,7 +45,7 @@ class EmpTableViewController: UIViewController {
         
         dataSource.delegate = self
         loadEmpList()
-    
+        
         
         // Setup the Search Controller
         searchController.searchBar.placeholder = "Search Employee"
@@ -56,18 +56,18 @@ class EmpTableViewController: UIViewController {
         // Set the searchBar in the navigation bar
         navigationItem.searchController = searchController
         definesPresentationContext = true
-       
+        
         // Setup the Filter Bar
         searchController.searchBar.scopeButtonTitles = ["Name", "Title", "Department", "Location"]
         searchController.searchBar.delegate = self
- 
+        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
     }
-
+    
     func loadEmpList(){
         dataSource.getEmployee(page_id: page_id_count, limit: 5)
     }
@@ -79,10 +79,10 @@ class EmpTableViewController: UIViewController {
 
 extension EmpTableViewController: UITableViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-       
+        
         let endScrolling:CGFloat = scrollView.contentOffset.y + scrollView.frame.size.height
         if(endScrolling >= scrollView.contentSize.height){
-           loadEmpList()
+            loadEmpList()
         }
     }
 }
@@ -90,7 +90,7 @@ extension EmpTableViewController: UITableViewDelegate {
 extension EmpTableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
+        
         // safe-unwrap => if it succeeds, => return custom cell.
         if let cell = tableView.dequeueReusableCell(withIdentifier: EmpCell.identifier, for: indexPath) as? EmpCell
         {
@@ -102,7 +102,7 @@ extension EmpTableViewController: UITableViewDataSource {
         return UITableViewCell()
     }
     
-  
+    
     // custom delete / update row
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
@@ -121,8 +121,8 @@ extension EmpTableViewController: UITableViewDataSource {
         
         
         let updtAction:UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.destructive, title: "update", handler: {_,_ in
-         
-           
+            
+            
             let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let EmpAddViewController = mainStoryboard.instantiateViewController(withIdentifier: "EmpAddViewController") as! EmpAddViewController
             EmpAddViewController.dataArray = self.dataArray[indexPath.row]
@@ -134,7 +134,7 @@ extension EmpTableViewController: UITableViewDataSource {
         
         return [updtAction, delAction]
     }
-   
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return dynamic array count => make tableview rows equal to dataArray size
         return dataArray.count 
@@ -142,12 +142,12 @@ extension EmpTableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedRow = indexPath.row
-
+        
         
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let EmpDetailsViewController = mainStoryboard.instantiateViewController(withIdentifier: "EmpDetailsViewController") as! EmpDetailsViewController
         EmpDetailsViewController.dataArray = self.dataArray[indexPath.row]
-          self.navigationController?.pushViewController(EmpDetailsViewController, animated: true)
+        self.navigationController?.pushViewController(EmpDetailsViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -159,7 +159,6 @@ extension EmpTableViewController: UITableViewDataSource {
         if segue.identifier == "showDetail" {
             if let navVC = segue.destination as? UINavigationController{
                 if let empdetailsVC: EmpDetailsViewController = navVC.visibleViewController as? EmpDetailsViewController{
-                    print("test")
                     empdetailsVC.dataArray = self.dataArray[selectedRow]
                 }
                 
@@ -175,7 +174,7 @@ extension EmpTableViewController: UITableViewDataSource {
     func filterContentForSearchText(_ searchText: String, scope: String) {
         self.dataArray.removeAll()
         dataSource.searchEmployee(type: scope.lowercased(), text:  searchText.lowercased())
-
+        
     }
     
     func searchBarIsEmpty() -> Bool {
@@ -194,7 +193,7 @@ extension EmpTableViewController: EmpTableViewDataModelDelegate {
     }
     
     func didRecieveDataUpdate(data: [EmpTableViewDataModelItem]) {
-
+        
         if(data.count  > 0){
             self.rowNumber =  self.dataArray.count
             dataArray.append(contentsOf: data)
