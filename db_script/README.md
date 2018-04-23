@@ -8,7 +8,7 @@ download it from
 https://www.postgresql.org/
 ```
 
-then check create_emp_db.sql
+then create the database  using create_emp_db sql file
 
 ```
 create_emp_db.sql
