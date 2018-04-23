@@ -7,13 +7,13 @@ As Front end we are using iOS Swift
 
 
 # Database
-https://github.com/doriobeidy7/postlight/tree/create_emp_db/db_script
+https://github.com/doriobeidy7/postlight/tree/master/db_script
 
 # Server - NodeJS
-https://github.com/doriobeidy7/postlight/tree/create_emp_db/nodejs-server
+https://github.com/doriobeidy7/postlight/tree/master/nodejs-server
 
 # iOS Project Demo
-https://github.com/doriobeidy7/postlight/tree/create_emp_db/project_ios
+https://github.com/doriobeidy7/postlight/tree/master/project_ios
 
 
 ```
