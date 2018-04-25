@@ -2,6 +2,7 @@
 
 -- DROP TABLE public.employees;
 
+CREATE SEQUENCE employees_id_seq;
 CREATE TABLE public.employees
 (
     name text COLLATE pg_catalog."default" NOT NULL,
